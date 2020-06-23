@@ -42,32 +42,37 @@ router.post('/token', (req, res) => {
 });
 
 router.post('/signup', verifyToken, (req, res) => {
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      if (user) {
-        return res.status(409).send('This Email is already registered.'); // Conflict
-      }
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
-          const newUser = new User({
-            displayName: req.body.displayName,
-            email: req.body.email,
-            password: hash,
-            accessToken: req.token
-          });
-          newUser.save()
-            .then(response => {
-              if (response) {
-                res.status(200).send('Account created successfully.');
-              }
-            })
-            .catch(err => {
-              console.log(err);
-              res.sendStatus(500);
+  jwt.verify(req.token, process.env.APP_SECRET, (err, authData) => {
+    if (err) {
+      return res.status(400).send('Invalid Token');
+    }
+    User.findOne({ email: req.body.email })
+      .then(user => {
+        if (user) {
+          return res.status(409).send('This Email is already registered.'); // Conflict
+        }
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(req.body.password, salt, (err, hash) => {
+            const newUser = new User({
+              displayName: req.body.displayName,
+              email: req.body.email,
+              password: hash,
+              accessToken: req.token
             });
+            newUser.save()
+              .then(response => {
+                if (response) {
+                  res.status(200).send('Account created successfully.');
+                }
+              })
+              .catch(err => {
+                console.log(err);
+                res.sendStatus(500);
+              });
+          });
         });
       });
-    });
+  });
 });
 
 module.exports = router;
