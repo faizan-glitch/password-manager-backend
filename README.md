@@ -2,12 +2,12 @@
 This Nodejs app will serve as a backend for the complete re-write of the Password Manager app.
 ## Getting Started
 1. Download and Install [Node.js](https://nodejs.org/en/download/)
-      * Linux (Ubuntu based distros)
-      ```console
-        sudo apt-get install curl
-        curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-        sudo apt-get install nodejs
-      ```
+  * Linux (Ubuntu based distros)
+  ```console
+    sudo apt-get install curl
+    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo apt-get install nodejs
+  ```
 2. Clone the [Github Repo](https://github.com/faizan-glitch/password-manager-backend)
   ```properties
   git clone https://github.com/faizan-glitch/password-manager-backend.git
