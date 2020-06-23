@@ -19,7 +19,8 @@ Type the following command in the terminal
  npm install
  ```
 ### Setting the App Key via Environment Variables
-1. Replace the **.env.example** with the **.env** file. 
+1. Rename the **.env.example** file to **.env**
+2. Set the required environment variables between the empty quotes. 
 ### Running the app
   * Development environment
     ```properties
